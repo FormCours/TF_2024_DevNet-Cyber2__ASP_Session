@@ -4,6 +4,10 @@ namespace DemoAppWeb_Session.Hubs
 {
     public class MessageHub : Hub
     {
+        public void NewMessage(string message)
+        {
+            Clients.All.SendAsync("Message", message);
+        }
 
         // qd qqun se connecte 
         public override Task OnConnectedAsync()
