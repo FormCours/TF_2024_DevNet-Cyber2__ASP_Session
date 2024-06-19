@@ -1,11 +1,6 @@
 ﻿using DemoAppWeb_Session.BLL.Interfaces;
 using DemoAppWeb_Session.BLL.Models;
 using Isopoh.Cryptography.Argon2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DemoAppWeb_Session.BLL.Services
 {
@@ -32,8 +27,91 @@ namespace DemoAppWeb_Session.BLL.Services
                 Lastname = "Vanderquack",
                 Role = Role.User,
             }
+             ,
+             new Member
+            {
+                MemberId = 3,
+                Username = "Ibrahim",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Ibrahim",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 4,
+                Username = "Zachary",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Zachary",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            }
+             ,
+             new Member
+            {
+                MemberId = 5,
+                Username = "Olivier",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Olivier",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 6,
+                Username = "Brian",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Brian",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 7,
+                Username = "Julien",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Julien",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 8,
+                Username = "Floriane",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Floriane",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 9,
+                Username = "Eleftherios",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Eleftherios",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 10,
+                Username = "Damien",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Damien",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            },
+             new Member
+            {
+                MemberId = 11,
+                Username = "Tanya",
+                HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
+                Firstname = "Tanya",
+                Lastname = "Vanderquack",
+                Role = Role.User,
+            }
         };
-        private static int _NextId = 3;
+        private static int _NextId = 12;
 
         public Member? Login(string username, string password)
         {

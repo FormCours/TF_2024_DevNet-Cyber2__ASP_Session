@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using DemoAppWeb_Session.Attributes;
+using DemoAppWeb_Session.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DemoAppWeb_Session.Hubs
 {
