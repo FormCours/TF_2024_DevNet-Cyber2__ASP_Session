@@ -1,5 +1,6 @@
 using DemoAppWeb_Session.BLL.Interfaces;
 using DemoAppWeb_Session.BLL.Services;
+using DemoAppWeb_Session.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddControllersWithViews();
 // Session
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
@@ -33,5 +36,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<MessageHub>("/signalr/message");
 
 app.Run();
