@@ -38,5 +38,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapHub<MessageHub>("/signalr/message");
+app.MapHub<JankenHub>("/signalr/janken");
+// n'oubliez de rajouter votre hub ici!!
 
 app.Run();

@@ -1,4 +1,5 @@
 ﻿@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" />
     <style>
     #messages {
         display: flex;
@@ -67,6 +68,7 @@
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
 
         const sendButton = document.querySelector('#sendButton');
@@ -94,7 +96,6 @@
             divCard.innerText = m.content;
 
             divMessage.append(divInfo, divCard);
-            console.log('tets', divMessage)
             messagesDiv.append(divMessage);
 
         }
@@ -109,6 +110,10 @@
 
         connection.on('MessageFromMe', m => {
             createMessage(m, true);
+        });
+
+        connection.on('Error', m => {
+            toastr.error(m);
         });
 
         connection.start();

@@ -15,6 +15,10 @@ namespace DemoAppWeb_Session.Hubs
                 Clients.Others.SendAsync("Message", new { Content = message, Auteur = username, Date = DateTime.Now });
                 Clients.Caller.SendAsync("MessageFromMe", new { Content = message, Auteur = username, Date = DateTime.Now });
             }
+            else
+            {
+                Clients.Caller.SendAsync("Error", "Vous devez être connecté pour pouvoir envoyer un message");
+            }
         }
 
         // qd qqun se connecte 

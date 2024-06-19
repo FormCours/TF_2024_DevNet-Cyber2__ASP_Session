@@ -1,0 +1,38 @@
+﻿@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl('/signalr/janken')
+            .build()
+
+        connection.on('PartieEnCours', m => {
+            alert(m + " a commencé une partie");
+        });
+
+        connection.on('IssuePartie', m => {
+            alert(m + " a gagné");
+        });
+
+        connection.on('Error', m => {
+            alert(m);
+        });
+
+        connection.start();
+
+        const btns = document.querySelectorAll('.btn');
+
+        for (let btn of btns) {
+            btn.addEventListener('click', e => {
+                const val = e.target.dataset.signe
+                connection.send("Jouer", parseInt(val))
+            })
+        }
+    </script>
+
+}
+    <div>
+        <button class="btn" data-signe="0">Pierre</button>
+        <button class="btn" data-signe="1">Papier</button>
+        <button class="btn" data-signe="2">Ciseaux</button>
+    </div>
