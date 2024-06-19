@@ -14,5 +14,7 @@ namespace DemoAppWeb_Session.BLL.Models
 
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+
+        public Role Role { get; set; }
     }
 }

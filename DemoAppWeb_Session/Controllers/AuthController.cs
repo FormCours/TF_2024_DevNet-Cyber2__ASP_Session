@@ -1,5 +1,6 @@
 ﻿using DemoAppWeb_Session.BLL.Interfaces;
 using DemoAppWeb_Session.BLL.Models;
+using DemoAppWeb_Session.Extensions;
 using DemoAppWeb_Session.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,9 +37,7 @@ namespace DemoAppWeb_Session.Controllers
                 return View(loginForm);
             }
 
-            // Enregistrer le membre dans la session (-> Evolution : SessionManager)
-            HttpContext.Session.SetInt32("MemberId", member.MemberId);
-            HttpContext.Session.SetString("Username", member.Username);
+            HttpContext.Session.Start(member.MemberId, member.Username, member.Role);
 
             return RedirectToAction("Index", "Home");
         }
@@ -47,8 +46,7 @@ namespace DemoAppWeb_Session.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            // Efface la session (-> Evolution : SessionManager)
-            HttpContext.Session.Clear();
+            HttpContext.Session.Stop();
 
             return RedirectToAction("Index", "Home");
         }

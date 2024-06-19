@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

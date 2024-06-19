@@ -8,8 +8,9 @@
 </div>
 
 <div>
-    @if(ViewContext.HttpContext.Session.GetInt32("MemberId") != null)
+    @if(ViewContext.HttpContext.Session.IsAuthenticated())
     {
-        <p>Bienvenue @ViewContext.HttpContext.Session.GetString("Username")</p>
+        <p>Bienvenue @ViewContext.HttpContext.Session.GetUserName()</p>
+        <p>Role @ViewContext.HttpContext.Session.GetRole()</p>
     }
 </div>

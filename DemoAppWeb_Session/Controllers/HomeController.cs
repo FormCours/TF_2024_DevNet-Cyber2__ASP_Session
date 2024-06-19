@@ -1,4 +1,8 @@
+using DemoAppWeb_Session.Attributes;
+using DemoAppWeb_Session.BLL.Models;
+using DemoAppWeb_Session.Extensions;
 using DemoAppWeb_Session.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,6 +22,8 @@ namespace DemoAppWeb_Session.Controllers
             return View();
         }
 
+        [IsLogged]
+        [HasRole(Role.Admin, Role.Moderator)]
         public IActionResult Privacy()
         {
             return View();

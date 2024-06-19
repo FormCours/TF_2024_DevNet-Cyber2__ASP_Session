@@ -20,7 +20,8 @@ namespace DemoAppWeb_Session.BLL.Services
                 Username = "Della",
                 HashPwd = "$argon2id$v=19$m=16,t=2,p=1$dTBKOU1LcWw5UUxLdUN0aQ$nhBktHfOTNPjxOjKuE9BRA",
                 Firstname = "Della",
-                Lastname = "Duck"
+                Lastname = "Duck",
+                Role = Role.Admin,
             },
              new Member
             {
@@ -28,7 +29,8 @@ namespace DemoAppWeb_Session.BLL.Services
                 Username = "Zaza42",
                 HashPwd = "$argon2id$v=19$m=16,t=2,p=1$M0IyN0x4MnhLZ2tHYXBFeg$oPXMeYUFL7yXsqRJ88Z4GA",
                 Firstname = "Zaza",
-                Lastname = "Vanderquack"
+                Lastname = "Vanderquack",
+                Role = Role.User,
             }
         };
         private static int _NextId = 3;
