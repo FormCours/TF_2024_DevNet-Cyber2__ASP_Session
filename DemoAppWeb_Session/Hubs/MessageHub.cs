@@ -9,7 +9,12 @@ namespace DemoAppWeb_Session.Hubs
     {
         public void NewMessage(string message)
         {
-            Clients.All.SendAsync("Message", message);
+            string? username = Context.GetHttpContext()?.Session.GetUserName();
+            if(username != null)
+            {
+                Clients.Others.SendAsync("Message", new { Content = message, Auteur = username, Date = DateTime.Now });
+                Clients.Caller.SendAsync("MessageFromMe", new { Content = message, Auteur = username, Date = DateTime.Now });
+            }
         }
 
         // qd qqun se connecte 

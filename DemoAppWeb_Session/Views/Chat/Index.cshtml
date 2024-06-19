@@ -1,0 +1,123 @@
+﻿@section Styles {
+    <style>
+    #messages {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 20px;
+    }
+    .message {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .message.me {
+        align-items: flex-end;
+    }
+
+    .message > .info {
+        font-style: italic;
+        font-size: 0.8em;
+        color: #333;
+    }
+
+    .message > .content {
+        width: 80%;
+        background: #bbbb33;
+        color: white;
+    }
+
+    .message.me > .content {
+        width: 80%;
+        background: #bb3333;
+    }
+    #form {
+        display: flex;
+    }
+    </style>
+}
+
+<div id="messages">
+    @* <div class="message">
+        <div class="info">Thierry 19/06/2024 10:00</div>
+        <div class="card content p-3">
+            Salut
+        </div>
+    </div>
+    <div class="message me">
+        <div class="info">19/06/2024 10:10</div>
+        <div class="card content p-3">
+            Hey !!
+        </div>
+    </div>
+    <div class="message">
+        <div class="info">Thierry 19/06/2024 10:11</div>
+        <div class="card content p-3">
+            ...
+        </div>
+    </div> *@
+</div>
+
+<div id="form">
+    <input id="messageInput" class="form-control m-1" type="text"/>
+    <button id="sendButton" class="btn btn-sm btn-info">Envoyer</button>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+
+        const sendButton = document.querySelector('#sendButton');
+        const messageInput = document.querySelector('#messageInput');
+        const messagesDiv = document.querySelector('#messages');
+
+        const createMessage = (m, fromMe = false) => {
+
+            const divMessage = document.createElement('div');
+            divMessage.classList.add('message');
+
+            if (fromMe) {
+                divMessage.classList.add('me');
+            }
+
+            const divInfo = document.createElement('div');
+            divInfo.classList.add('info');
+
+            const infoText = new Date(m.date).toLocaleDateString() + ' ' + new Date(m.date).toLocaleTimeString();
+
+            divInfo.innerText = `${m.auteur} ${infoText}`
+
+            const divCard = document.createElement('div');
+            divCard.classList.add('card', 'content', 'p-3');
+            divCard.innerText = m.content;
+
+            divMessage.append(divInfo, divCard);
+            console.log('tets', divMessage)
+            messagesDiv.append(divMessage);
+
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl('/signalr/message')
+            .build()
+
+        connection.on('Message', m => {
+            createMessage(m)
+        });
+
+        connection.on('MessageFromMe', m => {
+            createMessage(m, true);
+        });
+
+        connection.start();
+
+        sendButton.addEventListener('click', () => {
+            connection.send('NewMessage', messageInput.value);
+            messageInput.value = '';
+        });
+
+
+    </script>    
+}
