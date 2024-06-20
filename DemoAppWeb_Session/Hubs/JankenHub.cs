@@ -10,31 +10,31 @@ namespace DemoAppWeb_Session.Hubs
 
     public class JankenHub: Hub
     {
-        private static Signe? SigneEnMemoire;
-        private static string? NomJoueurMemoire; 
+        private static Signe? Signe1;
+        private static string? Joueur1; 
 
         public void Jouer(Signe signe)
         {
-            if(SigneEnMemoire == null)
+            if(Signe1 == null)
             {
-                SigneEnMemoire = signe;
-                NomJoueurMemoire = Context.GetHttpContext()?.Session.GetUserName();
-                Clients.All.SendAsync("PartieEnCours", NomJoueurMemoire);
+                Signe1 = signe;
+                Joueur1 = Context.GetHttpContext()?.Session.GetUserName();
+                Clients.All.SendAsync("PartieEnCours", Joueur1);
             }
             else
             {
-                string joueur2 = Context.GetHttpContext()?.Session.GetUserName();
-                if(joueur2 == NomJoueurMemoire)
+                string? joueur2 = Context.GetHttpContext()?.Session.GetUserName();
+                if(joueur2 == Joueur1)
                 {
                     Clients.Caller.SendAsync("Error", "Vous ne pouvez pas jouer contre vous même");
                     return;
                 }
-                if (SigneEnMemoire == signe)
+                if (Signe1 == signe)
                 {
                     // égalité
                     Clients.All.SendAsync("IssuePartie", "Egalite");
                 }
-                else if(SigneEnMemoire == Signe.Pierre)
+                else if(Signe1 == Signe.Pierre)
                 {
                     if(signe == Signe.Papier)
                     {
@@ -44,10 +44,10 @@ namespace DemoAppWeb_Session.Hubs
                     else
                     {
                         // joueur1 gagne 
-                        Clients.All.SendAsync("IssuePartie", NomJoueurMemoire);
+                        Clients.All.SendAsync("IssuePartie", Joueur1);
                     }
                 }
-                else if (SigneEnMemoire == Signe.Papier)
+                else if (Signe1 == Signe.Papier)
                 {
                     if (signe == Signe.Ciseaux)
                     {
@@ -57,10 +57,10 @@ namespace DemoAppWeb_Session.Hubs
                     else
                     {
                         // joueur1 gagne 
-                        Clients.All.SendAsync("IssuePartie", NomJoueurMemoire);
+                        Clients.All.SendAsync("IssuePartie", Joueur1);
                     }
                 }
-                else if (SigneEnMemoire == Signe.Ciseaux)
+                else if (Signe1 == Signe.Ciseaux)
                 {
                     if (signe == Signe.Pierre)
                     {
@@ -70,11 +70,11 @@ namespace DemoAppWeb_Session.Hubs
                     else
                     {
                         // joueur1 gagne 
-                        Clients.All.SendAsync("IssuePartie", NomJoueurMemoire);
+                        Clients.All.SendAsync("IssuePartie", Joueur1);
                     }
                 }
-                SigneEnMemoire = null;
-                NomJoueurMemoire = null;
+                Signe1 = null;
+                Joueur1 = null;
             }
         }
     }
